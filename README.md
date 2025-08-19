@@ -1,21 +1,18 @@
-# Home Assistant Seneye Integration (Pi Bridge Edition)
+# Seneye USB Sensor — Home Assistant Custom Integration
 
-This is a custom integration to connect your **Seneye Reef / Pond / Home** device to Home Assistant.
+Local‑first integration for **Seneye USB** probes. Polls the device via `pyseneye` and exposes sensors for Temperature, pH, NH3, PAR, PUR, LUX, Kelvin; plus binary sensors for **In Water** and **Slide Problem**. Includes UI options (poll interval + calibration), diagnostics export, and a `seneye.force_update` service.
 
-It uses a Raspberry Pi as a **USB/IP bridge**, following the setup instructions in [`docs/raspberry-pi-setup.md`](docs/raspberry-pi-setup.md).
+**Repo:** https://github.com/tamengual/home-assistant-seneye-pi
 
-## Installation
+## Install via HACS (Custom Repository)
+1. HACS → … → **Custom repositories** → Add `https://github.com/tamengual/home-assistant-seneye-pi` (type: Integration)
+2. Install **Seneye USB Sensor**
+3. Restart Home Assistant
+4. Settings → Devices & Services → **Add Integration** → *Seneye USB Sensor*
 
-### HACS (preferred)
-1. Go to HACS → Integrations → Custom repositories
-2. Add this repo: `https://github.com/tamengual/home-assistant-seneye-pi`
-3. Search for **Seneye** and install
+## USB/IP Pi Bridge
+See `docs/raspberry-pi-usbip.md` and `docs/home-assistant-attach.md` to run the Seneye on a Raspberry Pi near the tank and attach it to your HA host over USB/IP.
 
-### Manual
-Copy `custom_components/seneye` into your Home Assistant `custom_components` folder.
-
-## Setup
-After install, restart Home Assistant. Then add the Seneye integration from the UI.
-
----
-Maintained by @tamengual
+## Trouble?
+- If dependency installation fails, use an unpinned requirement (`"pyseneye"`) in `manifest.json`.
+- If legacy template entities collide, rename/remove them to avoid duplicate IDs.

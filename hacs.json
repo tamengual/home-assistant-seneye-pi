@@ -1,6 +1,6 @@
 {
-  "name": "Seneye",
-  "domains": ["seneye"],
-  "homeassistant": "2024.1.0",
+  "name": "Seneye USB Sensor",
+  "homeassistant": "2024.12.0",
+  "hacs": "1.35.0",
   "render_readme": true
 }

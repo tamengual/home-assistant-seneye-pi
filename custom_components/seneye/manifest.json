@@ -3,9 +3,13 @@
   "name": "Seneye USB Sensor",
   "documentation": "https://github.com/tamengual/home-assistant-seneye-pi#readme",
   "issue_tracker": "https://github.com/tamengual/home-assistant-seneye-pi/issues",
-  "codeowners": ["@tamengual"],
-  "version": "1.3.4",
-  "requirements": ["pyseneye"],
+  "codeowners": [
+    "@tamengual"
+  ],
+  "version": "1.3.5",
+  "requirements": [
+    "pyseneye"
+  ],
   "config_flow": true,
   "iot_class": "local_polling"
 }

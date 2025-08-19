@@ -1,0 +1,27 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Seneye USB Sensor",
+        "description": "Add the local Seneye USB device."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Seneye is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Seneye Options",
+        "data": {
+          "update_interval_min": "Update interval (minutes)",
+          "temp_offset": "Temperature offset (\u00b0C)",
+          "ph_offset": "pH offset (additive)",
+          "par_scale": "PAR scale (multiplier)"
+        },
+        "description": "Adjust poll interval and calibration."
+      }
+    }
+  }
+}

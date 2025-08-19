@@ -1,0 +1,3 @@
+force_update:
+  name: Force Update
+  description: "Forces an immediate update of all Seneye sensor data from the USB device."
