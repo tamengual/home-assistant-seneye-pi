@@ -1,4 +1,4 @@
-{
+﻿{
   "domain": "seneye",
   "name": "Seneye USB Sensor",
   "documentation": "https://github.com/tamengual/home-assistant-seneye-pi#readme",
@@ -6,7 +6,7 @@
   "codeowners": [
     "@tamengual"
   ],
-  "version": "1.3.5",
+  "version": "1.4.0",
   "requirements": [
     "pyseneye"
   ],
