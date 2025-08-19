@@ -1,0 +1,16 @@
+﻿name: Bug report
+description: Report a problem with the Seneye integration
+labels: bug
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+  - type: textarea
+    attributes:
+      label: Logs (Settings → System → Logs)
+  - type: input
+    attributes:
+      label: Integration version (manifest)
+  - type: input
+    attributes:
+      label: Home Assistant version

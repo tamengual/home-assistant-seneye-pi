@@ -1,0 +1,13 @@
+﻿# OS/editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+
+# HA/HACS
+.custom_components_cache/
