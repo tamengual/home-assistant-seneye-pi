@@ -1,0 +1,15 @@
+[Unit]
+Description=Seneye → MQTT publisher
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/default/seneye-mqtt
+WorkingDirectory=/opt/seneye-mqtt
+ExecStart=/usr/bin/env bash -lc '. venv/bin/activate && python3 mqtt_publisher/seneye_mqtt_publisher.py'
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

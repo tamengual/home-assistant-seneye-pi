@@ -1,0 +1,94 @@
+# dashboards/seneye-dashboard.yaml
+# Import this as a new dashboard in Home Assistant (Settings → Dashboards → Add Dashboard → YAML mode).
+
+title: Seneye
+views:
+  - title: Overview
+    path: seneye
+    icon: mdi:fishbowl
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            name: NH3 (ppm)
+            entity: sensor.seneye_nh3
+            min: 0
+            max: 1
+            severity:
+              green: 0
+              yellow: 0.02
+              red: 0.05
+          - type: gauge
+            name: pH
+            entity: sensor.seneye_ph
+            min: 6
+            max: 9
+            severity:
+              green: 7.8
+              yellow: 7.5
+              red: 7.2
+          - type: gauge
+            name: Temp (°C)
+            entity: sensor.seneye_temperature
+            min: 20
+            max: 32
+            severity:
+              green: 24
+              yellow: 22
+              red: 20
+
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            name: PAR
+            entity: sensor.seneye_par
+            min: 0
+            max: 500
+            severity:
+              green: 50
+              yellow: 200
+              red: 400
+          - type: gauge
+            name: PUR (%)
+            entity: sensor.seneye_pur
+            min: 0
+            max: 100
+            severity:
+              green: 40
+              yellow: 70
+              red: 85
+          - type: gauge
+            name: Lux
+            entity: sensor.seneye_lux
+            min: 0
+            max: 60000
+            severity:
+              green: 5000
+              yellow: 20000
+              red: 40000
+
+      - type: entities
+        title: Status
+        entities:
+          - entity: binary_sensor.seneye_in_water
+            name: Probe in water
+          - entity: binary_sensor.seneye_slide_problem
+            name: Slide status
+          - entity: sensor.seneye_kelvin
+            name: Kelvin (K)
+
+      - type: history-graph
+        title: Last 24h – key metrics
+        hours_to_show: 24
+        entities:
+          - sensor.seneye_nh3
+          - sensor.seneye_ph
+          - sensor.seneye_temperature
+
+      - type: history-graph
+        title: Last 24h – lighting
+        hours_to_show: 24
+        entities:
+          - sensor.seneye_par
+          - sensor.seneye_pur
+          - sensor.seneye_lux

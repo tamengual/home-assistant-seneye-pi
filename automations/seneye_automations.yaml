@@ -1,0 +1,74 @@
+# automations/seneye_automations.yaml
+# Import via Settings → Automations → ⋮ → Import blueprint/automation (paste YAML), or copy snippets into your automations.yaml.
+
+# 1) NH3 high alert (sustained)
+- id: seneye_nh3_high_alert
+  alias: "Seneye: NH3 high alert"
+  description: "Notify if NH3 exceeds 0.05 ppm for 10 minutes"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.seneye_nh3
+      above: 0.05
+      for: "00:10:00"
+  condition: []
+  action:
+    - service: notify.persistent_notification
+      data:
+        message: "Seneye NH3 high: {{ states('sensor.seneye_nh3') }} ppm"
+        title: "Aquarium Warning"
+    - service: homeassistant.turn_on
+      target:
+        entity_id: script.seneye_high_nh3_actions
+      continue_on_error: true
+  mode: single
+
+# 2) Probe out of water
+- id: seneye_probe_out_of_water
+  alias: "Seneye: Probe out of water"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.seneye_in_water
+      to: "off"
+      for: "00:01:00"
+  action:
+    - service: notify.persistent_notification
+      data:
+        message: "Seneye probe appears out of water for 1+ minute."
+        title: "Aquarium Attention"
+  mode: single
+
+# 3) Slide expired/problem
+- id: seneye_slide_problem
+  alias: "Seneye: Slide problem"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.seneye_slide_problem
+      to: "on"
+  action:
+    - service: notify.persistent_notification
+      data:
+        message: "Seneye slide needs attention (expired or missing)."
+        title: "Aquarium Maintenance"
+  mode: single
+
+# 4) Data stale alert (no updates in 30 min)
+- id: seneye_data_stale
+  alias: "Seneye: data stale"
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.seneye_temperature
+        - sensor.seneye_ph
+        - sensor.seneye_nh3
+      for: "00:30:00"
+  condition: []
+  action:
+    - service: notify.persistent_notification
+      data:
+        title: "Seneye data stale"
+        message: |
+          No new readings for 30+ minutes.
+          Last temp: {{ states('sensor.seneye_temperature') }} °C
+          Last pH: {{ states('sensor.seneye_ph') }}
+          Last NH3: {{ states('sensor.seneye_nh3') }} ppm
+  mode: single

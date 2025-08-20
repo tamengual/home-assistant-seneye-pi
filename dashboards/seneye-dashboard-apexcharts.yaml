@@ -1,0 +1,40 @@
+# dashboards/seneye-dashboard-apexcharts.yaml
+# Optional: requires installing "apexcharts-card" via HACS and adding the resource in Settings → Dashboards → Resources.
+
+title: Seneye (ApexCharts)
+views:
+  - title: Overview
+    path: seneye-apex
+    icon: mdi:fishbowl-outline
+    cards:
+      - type: custom:apexcharts-card
+        header:
+          title: Water Chemistry (24h)
+        graph_span: 24h
+        series:
+          - entity: sensor.seneye_ph
+            name: pH
+            type: line
+          - entity: sensor.seneye_nh3
+            name: NH3
+            type: line
+            yaxis_id: right
+        yaxis:
+          - id: left
+            min: 7.0
+            max: 8.8
+          - id: right
+            opposite: true
+            min: 0
+            max: 0.25
+      - type: custom:apexcharts-card
+        header:
+          title: Lighting (24h)
+        graph_span: 24h
+        series:
+          - entity: sensor.seneye_par
+            name: PAR
+          - entity: sensor.seneye_pur
+            name: PUR
+          - entity: sensor.seneye_lux
+            name: Lux

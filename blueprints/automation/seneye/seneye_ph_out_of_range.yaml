@@ -1,0 +1,88 @@
+blueprint:
+  name: Seneye – pH out-of-range (asymmetric)
+  description: >
+    Notify when pH is below a low threshold OR above a high threshold,
+    sustained for a chosen duration. Saltwater-friendly default range.
+  domain: automation
+  input:
+    ph_entity:
+      name: pH sensor
+      selector:
+        entity:
+          filter:
+            domain: sensor
+          multiple: false
+    low_threshold:
+      name: Low threshold
+      default: 7.8
+      selector:
+        number:
+          min: 6.0
+          max: 9.5
+          step: 0.05
+          mode: slider
+    high_threshold:
+      name: High threshold
+      default: 8.6
+      selector:
+        number:
+          min: 6.0
+          max: 9.5
+          step: 0.05
+          mode: slider
+    duration:
+      name: Duration (minutes)
+      default: 10
+      selector:
+        number:
+          min: 0
+          max: 120
+          step: 1
+          mode: slider
+    notify_service:
+      name: Notify service
+      default: notify.persistent_notification
+      selector:
+        text: {}
+
+mode: single
+
+variables:
+  ph_entity: !input ph_entity
+  low: !input low_threshold
+  high: !input high_threshold
+
+trigger:
+  - platform: numeric_state
+    entity_id: !input ph_entity
+    below: !input low_threshold
+    for:
+      minutes: !input duration
+    id: low
+  - platform: numeric_state
+    entity_id: !input ph_entity
+    above: !input high_threshold
+    for:
+      minutes: !input duration
+    id: high
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: low
+        sequence:
+          - service: !input notify_service
+            data:
+              title: "Aquarium Warning – pH low"
+              message: >
+                pH {{ states(ph_entity) }} is below {{ low }} for {{ !input duration }} min.
+      - conditions:
+          - condition: trigger
+            id: high
+        sequence:
+          - service: !input notify_service
+            data:
+              title: "Aquarium Warning – pH high"
+              message: >
+                pH {{ states(ph_entity) }} is above {{ high }} for {{ !input duration }} min.

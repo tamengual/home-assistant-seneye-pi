@@ -1,0 +1,44 @@
+blueprint:
+  name: Seneye – Data stale alert
+  description: >
+    Alert when any selected Seneye sensors have not updated for N minutes.
+  domain: automation
+  input:
+    entities:
+      name: Entities to watch
+      selector:
+        entity:
+          multiple: true
+          filter:
+            - domain: sensor
+    minutes:
+      name: Minutes without updates
+      default: 30
+      selector:
+        number:
+          min: 5
+          max: 240
+          step: 5
+          mode: slider
+    notify_service:
+      name: Notify service
+      default: notify.persistent_notification
+      selector:
+        text: {}
+
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: !input entities
+    for:
+      minutes: !input minutes
+
+action:
+  - service: !input notify_service
+    data:
+      title: "Seneye data stale"
+      message: >
+        No updates from: {%- for e in !input entities -%}
+        {{ state_attr(e,'friendly_name') or e }}{%- if not loop.last %}, {% endif -%}
+        {%- endfor %} for {{ !input minutes }} minutes.

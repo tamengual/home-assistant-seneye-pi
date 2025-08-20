@@ -1,0 +1,56 @@
+blueprint:
+  name: Seneye – NH3 sustained high alert
+  description: >
+    Notify when NH3 stays above a threshold for a set duration.
+    Works with this custom Seneye integration.
+  domain: automation
+  input:
+    nh3_entity:
+      name: NH3 sensor
+      selector:
+        entity:
+          filter:
+            domain: sensor
+          multiple: false
+    threshold:
+      name: Threshold (ppm)
+      default: 0.05
+      selector:
+        number:
+          min: 0
+          max: 2
+          step: 0.01
+          mode: box
+    duration:
+      name: Duration above threshold (minutes)
+      default: 10
+      selector:
+        number:
+          min: 0
+          max: 120
+          step: 1
+          mode: slider
+    notify_service:
+      name: Notify service (optional)
+      description: Example: 'notify.mobile_app_yourphone' or 'notify.persistent_notification'
+      default: notify.persistent_notification
+      selector:
+        text:
+          multiline: false
+
+mode: single
+
+trigger:
+  - platform: numeric_state
+    entity_id: !input nh3_entity
+    above: !input threshold
+    for:
+      minutes: !input duration
+
+action:
+  - service: !input notify_service
+    data:
+      title: "Aquarium Warning"
+      message: >
+        NH3 high for {{ !input duration }} min.
+        Current: {{ states(!input nh3_entity) }} ppm (threshold {{ !input threshold }}).

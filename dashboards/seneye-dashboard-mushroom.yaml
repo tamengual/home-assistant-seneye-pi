@@ -1,0 +1,137 @@
+# dashboards/seneye-dashboard-mushroom.yaml
+# Requires HACS: Mushroom cards (install "Mushroom" via HACS and add the resource)
+title: Seneye (Mushroom)
+views:
+  - title: Overview
+    path: seneye-mushroom
+    icon: mdi:fish
+    cards:
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+          - type: custom:mushroom-gauge-card
+            name: NH3 (ppm)
+            entity: sensor.seneye_nh3
+            min: 0
+            max: 1
+            severity:
+              - color: green
+                from: 0
+                to: 0.02
+              - color: yellow
+                from: 0.02
+                to: 0.05
+              - color: red
+                from: 0.05
+                to: 1
+          - type: custom:mushroom-gauge-card
+            name: pH
+            entity: sensor.seneye_ph
+            min: 6
+            max: 9
+            severity:
+              - color: red
+                from: 6
+                to: 7.2
+              - color: yellow
+                from: 7.2
+                to: 7.5
+              - color: green
+                from: 7.5
+                to: 8.4
+              - color: yellow
+                from: 8.4
+                to: 8.7
+              - color: red
+                from: 8.7
+                to: 9
+          - type: custom:mushroom-gauge-card
+            name: Temp (°C)
+            entity: sensor.seneye_temperature
+            min: 20
+            max: 32
+            severity:
+              - color: red
+                from: 20
+                to: 22
+              - color: yellow
+                from: 22
+                to: 24
+              - color: green
+                from: 24
+                to: 27
+              - color: yellow
+                from: 27
+                to: 29
+              - color: red
+                from: 29
+                to: 32
+
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+          - type: custom:mushroom-gauge-card
+            name: PAR
+            entity: sensor.seneye_par
+            min: 0
+            max: 500
+            severity:
+              - color: green
+                from: 50
+                to: 200
+              - color: yellow
+                from: 200
+                to: 400
+              - color: red
+                from: 400
+                to: 500
+          - type: custom:mushroom-gauge-card
+            name: PUR (%)
+            entity: sensor.seneye_pur
+            min: 0
+            max: 100
+            severity:
+              - color: green
+                from: 40
+                to: 70
+              - color: yellow
+                from: 70
+                to: 85
+              - color: red
+                from: 85
+                to: 100
+          - type: custom:mushroom-gauge-card
+            name: Lux
+            entity: sensor.seneye_lux
+            min: 0
+            max: 60000
+            severity:
+              - color: green
+                from: 5000
+                to: 20000
+              - color: yellow
+                from: 20000
+                to: 40000
+              - color: red
+                from: 40000
+                to: 60000
+
+      - type: entities
+        title: Status
+        entities:
+          - entity: binary_sensor.seneye_in_water
+            name: Probe in water
+          - entity: binary_sensor.seneye_slide_problem
+            name: Slide status
+          - entity: sensor.seneye_kelvin
+            name: Kelvin (K)
+
+      - type: history-graph
+        title: Last 24h – chemistry
+        hours_to_show: 24
+        entities:
+          - sensor.seneye_nh3
+          - sensor.seneye_ph
+          - sensor.seneye_temperature
