@@ -44,7 +44,7 @@ Shipped with **dashboards**, **blueprints**, and **automations** for an instant,
 
 This diagram illustrates the different ways you can connect your Seneye device to Home Assistant using this integration.
 
-//text
+```text
 Seneye USB Probe
    |
    |--> [Option 1: Direct Connection]
@@ -64,6 +64,7 @@ Seneye USB Probe
                +-- (MQTT) --> MQTT Broker
                               |
                               +-- (MQTT) --> Home Assistant (using MQTT Backend)
+```
 
 - **HID** (default) reads `/dev/hidraw*` (works for direct USB *and* when HA attaches a USB/IP device).
 - **MQTT** backend subscribes to `<prefix>/state` with parsed readings (publisher included here).
