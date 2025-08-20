@@ -64,7 +64,7 @@ Seneye USB Probe
                +-- (MQTT) --> MQTT Broker
                               |
                               +-- (MQTT) --> Home Assistant (using MQTT Backend)
-
+```
 - **HID** (default) reads `/dev/hidraw*` (works for direct USB *and* when HA attaches a USB/IP device).
 - **MQTT** backend subscribes to `<prefix>/state` with parsed readings (publisher included here).
 
