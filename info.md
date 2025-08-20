@@ -48,7 +48,7 @@ This diagram illustrates the different ways you can connect your Seneye device t
 graph TD
     subgraph "Seneye USB Device"
         direction LR
-        S[<img src='[https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png](https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png)' width='60' /> Seneye Probe]
+        S["<img src='[https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png](https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png)' width='60' /> Seneye Probe"]
     end
 
     subgraph "Setup Options"
