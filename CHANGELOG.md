@@ -1,4 +1,4 @@
-﻿## 1.4.0
+## 1.4.0
 - First public release
 - Sensors: Temp, pH, NH3, PAR, PUR, Lux, Kelvin
 - Binary sensors: In Water, Slide Problem
