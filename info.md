@@ -44,7 +44,6 @@ Shipped with **dashboards**, **blueprints**, and **automations** for an instant,
 
 This diagram illustrates the different ways you can connect your Seneye device to Home Assistant using this integration.
 
-```text
 Seneye USB Probe
    |
    |--> [Option 1: Direct Connection]
