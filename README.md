@@ -30,32 +30,40 @@ Shipped with **dashboards**, **blueprints**, and **automations** for an instant,
 
 ## Features
 
-- **Multiple backends**: HID (default), USB/IP, MQTT
-- **Sensors**: Temperature (°C), pH, NH3 (ppm), PAR, PUR, Lux, Kelvin
-- **Binary sensors**: In‑water, Slide problem
-- **Options flow**: Update interval, temperature/pH offset, PAR scale, MQTT prefix, backend selector
-- **Services**: `seneye.force_update`, `seneye.connection_test`
-- **Dashboards**: Built‑in gauges, optional ApexCharts, and Mushroom “danger dial”
-- **Automations & Blueprints**: NH3 high, pH out‑of‑range, data stale
+* **Multiple Backends**: Connect via the method that best suits your setup.
+    * **HID (Default)**: For devices directly connected via USB or attached over the network using a USB/IP client.
+    * **MQTT**: For devices connected to a remote computer (like a Raspberry Pi or AquaPi), which then publishes sensor data over the network.
+* **Standalone MQTT Publisher**: A lightweight Python script with a `systemd` service to run on any Linux-based machine (e.g., Raspberry Pi) that has the Seneye device attached.
+* **Pre-made Dashboards**: Three ready-to-use Lovelace dashboards to visualize your Seneye data (Standard, ApexCharts, and Mushroom).
+* **Automation Blueprints**: Easy-to-configure blueprints for critical alerts, including high NH3, pH out of range, and stale data warnings.
+* **Installer Scripts**: Helper scripts for Linux and Windows to automate the installation of the dashboard files.
 
 ---
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  A[Seneye USB probe] -->|USB| B(Host)
-  subgraph Paths
-    direction TB
-    B -- Direct USB --> H[Home Assistant host]
-    B -- USB/IP server --> P[Raspberry Pi (USB/IP)]
-    P -- USB/IP attach --> H
-    B -- MQTT publisher --> M[(MQTT Broker)]
-    M --> H
-  end
-  H --> D[Lovelace dashboards]
-  H --> N[Notifications / Automations]
-```
+This diagram illustrates the different ways you can connect your Seneye device to Home Assistant using this integration.
+
+```text
+Seneye USB Probe
+   |
+   |--> [Option 1: Direct Connection]
+   |      |
+   |      +--> Home Assistant Host (using HID Backend)
+   |
+   |--> [Option 2: USB over Network]
+   |      |
+   |      +--> Raspberry Pi / PC (running USB/IP Server)
+   |           |
+   |           +-- (USB over IP) --> Home Assistant (using USB/IP Client & HID Backend)
+   |
+   +--> [Option 3: MQTT over Network]
+          |
+          +--> Any PC / Pi (running MQTT Publisher Script)
+               |
+               +-- (MQTT) --> MQTT Broker
+                              |
+                              +-- (MQTT) --> Home Assistant (using MQTT Backend)
 
 - **HID** (default) reads `/dev/hidraw*` (works for direct USB *and* when HA attaches a USB/IP device).
 - **MQTT** backend subscribes to `<prefix>/state` with parsed readings (publisher included here).
