@@ -7,19 +7,18 @@ on:
 
 jobs:
   hassfest:
-    name: hassfest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: home-assistant/actions/hassfest@master
 
   hacs:
-    name: HACS
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: HACS validation
         uses: hacs/action@main
         with:
-          category: integration     # ← REQUIRED
-          ignore: brands            # (optional) we’re not publishing to the brands repo
+          category: integration
+          ignore: brands
+          repository: tamengual/home-assistant-seneye-pi
