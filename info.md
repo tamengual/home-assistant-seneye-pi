@@ -43,19 +43,35 @@ Shipped with **dashboards**, **blueprints**, and **automations** for an instant,
 ## Architecture
 
 ```mermaid
-flowchart LR
-  A[Seneye USB probe] -->|USB| B(Host)
-  subgraph Paths
-    direction TB
-    B -- Direct USB --> H[Home Assistant host]
-    B -- USB/IP server --> P[Raspberry Pi (USB/IP)]
-    P -- USB/IP attach --> H
-    B -- MQTT publisher --> M[(MQTT Broker)]
-    M --> H
-  end
-  H --> D[Lovelace dashboards]
-  H --> N[Notifications / Automations]
-```
+graph TD
+    subgraph "Seneye USB Device"
+        direction LR
+        S[<img src='https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png' width='60' /> Seneye Probe]
+    end
+
+    subgraph "Setup Options"
+        direction TB
+
+        subgraph "Option 1: Direct Connection"
+            style O1 fill:#f9f,stroke:#333,stroke-width:2px,text-align:center
+            O1(<b>Home Assistant Host</b><br>HID Backend)
+        end
+
+        subgraph "Option 2: USB over Network"
+            style O2 fill:#ccf,stroke:#333,stroke-width:2px,text-align:center
+            P(<b>Raspberry Pi / PC</b><br>USB/IP Server) -- "USB over IP" --> O2(<b>Home Assistant</b><br>HID Backend +<br>USB/IP Client Add-on)
+        end
+
+        subgraph "Option 3: MQTT over Network"
+            style O3 fill:#cfc,stroke:#333,stroke-width:2px,text-align:center
+            H(<b>Any PC / Pi</b><br>MQTT Publisher Script) -- "MQTT" --> M(MQTT Broker) -- "MQTT" --> O3(<b>Home Assistant</b><br>MQTT Backend)
+        end
+
+    end
+
+    S --> O1
+    S --> P
+    S --> H
 
 - **HID** (default) reads `/dev/hidraw*` (works for direct USB *and* when HA attaches a USB/IP device).
 - **MQTT** backend subscribes to `<prefix>/state` with parsed readings (publisher included here).
