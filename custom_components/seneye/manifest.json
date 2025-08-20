@@ -1,16 +1,14 @@
 {
   "domain": "seneye",
-  "name": "Seneye USB Sensor",
-  "documentation": "https://github.com/tamengual/home-assistant-seneye-pi#readme",
+  "name": "Seneye",
+  "documentation": "https://github.com/tamengual/home-assistant-seneye-pi",
   "issue_tracker": "https://github.com/tamengual/home-assistant-seneye-pi/issues",
-  "codeowners": [
-    "@tamengual"
-  ],
-  "version": "1.4.0",
+  "codeowners": ["@tamengual"],
   "requirements": [
-    "pyseneye"
+    "pyseneye",
+    "pyusb"
   ],
+  "version": "1.5.0",
   "config_flow": true,
   "iot_class": "local_polling"
 }
-
