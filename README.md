@@ -68,6 +68,16 @@ Seneye USB Probe
 - **HID** (default) reads `/dev/hidraw*` (works for direct USB *and* when HA attaches a USB/IP device).
 - **MQTT** backend subscribes to `<prefix>/state` with parsed readings (publisher included here).
 
+Recommended Hardware for Raspberry Pi Setups
+If you are connecting your Seneye to a Raspberry Pi (for either the USB/IP or MQTT methods), using the correct power hardware is critical for stability. Raspberry Pis can be sensitive to power demands, which can lead to USB devices not being detected after a reboot and potential SD card corruption.
+
+To prevent these issues, the following hardware is strongly recommended:
+
+High-Quality Power Supply: Use an official or well-regarded power supply for your specific Raspberry Pi model (e.g., 5V 3A for a Pi 4 or Zero 2 W). Do not use a standard phone charger.
+
+Powered USB Hub: This is the most important component for reliability. A powered hub has its own power adapter and provides stable, consistent power to the Seneye probe, bypassing the Pi's own power limitations.
+
+Correct Connection: Raspberry Pi → Powered USB Hub → Seneye Probe
 ---
 
 ## Which setup should I choose?
