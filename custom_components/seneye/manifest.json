@@ -1,14 +1,14 @@
 {
   "domain": "seneye",
   "name": "Seneye",
-  "documentation": "https://github.com/tamengual/home-assistant-seneye-pi",
-  "issue_tracker": "https://github.com/tamengual/home-assistant-seneye-pi/issues",
   "codeowners": ["@tamengual"],
+  "config_flow": true,
+  "documentation": "https://github.com/tamengual/home-assistant-seneye-pi",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/tamengual/home-assistant-seneye-pi/issues",
   "requirements": [
     "pyseneye",
     "pyusb"
   ],
-  "version": "1.5.0",
-  "config_flow": true,
-  "iot_class": "local_polling"
+  "version": "1.5.0"
 }
