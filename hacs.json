@@ -1,8 +1,4 @@
 {
   "name": "Seneye USB Sensor",
-  "domain": "seneye",
-  "render_readme": true,
-  "hacs_min_version": "1.33.0",
-  "zip_release": false,
-  "content_in_root": false
+  "render_readme": true
 }
