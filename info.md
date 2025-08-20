@@ -42,11 +42,13 @@ Shipped with **dashboards**, **blueprints**, and **automations** for an instant,
 
 ## Architecture
 
+This diagram illustrates the different ways you can connect your Seneye device to Home Assistant using this integration.
+
 ```mermaid
 graph TD
     subgraph "Seneye USB Device"
         direction LR
-        S[<img src='https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png' width='60' /> Seneye Probe]
+        S[<img src='[https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png](https://www.seneye.com/images/consumer/rebrand/p-home-front-on.png)' width='60' /> Seneye Probe]
     end
 
     subgraph "Setup Options"
@@ -72,7 +74,6 @@ graph TD
     S --> O1
     S --> P
     S --> H
-
 - **HID** (default) reads `/dev/hidraw*` (works for direct USB *and* when HA attaches a USB/IP device).
 - **MQTT** backend subscribes to `<prefix>/state` with parsed readings (publisher included here).
 
