@@ -1,9 +1,3 @@
-You are absolutely right. My apologies. We troubleshooted the files so much that I defaulted to the wrong set of instructions for the client setup. You are correct that we did not use SSH for the Home Assistant side, and the UI-based Add-on method is much simpler.
-
-Let's get this documented correctly. Here are the detailed instructions for setting up the **USBIP Client Add-on** in Home Assistant to connect to your already-configured Pi server.
-
------
-
 ## **Connecting the Seneye via the USBIP Add-on**
 
 This guide assumes your Raspberry Pi server is already running and sharing the Seneye device. These steps are performed entirely within the Home Assistant user interface.
