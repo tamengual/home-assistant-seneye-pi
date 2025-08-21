@@ -27,6 +27,7 @@ We will start with a completely clean OS to ensure there is no file corruption.
     * **Enable SSH:** Check the box to allow remote access.
     * **Set username and password:** Create your user.
     * **Configure wireless LAN:** Enter your Wi-Fi credentials if you are not using an Ethernet cable.
+    * make sure you select the correct keyboard during this step as an incorrect one will make it impossible to enter your password correctly
 5.  Write the image to the SD card.
 
 ---
@@ -167,3 +168,4 @@ This is the reverse of the process, which is the temporary startup sequence we d
 4. Start the Client: Go to the USBIP Client add-on in Home Assistant and click Start.
 
 Following this sequence will give you the most stable operation possible until your new powered USB hub arrives. The hub should eliminate the need for this entire process, as it will provide stable power from the very start of the boot sequence.
+
