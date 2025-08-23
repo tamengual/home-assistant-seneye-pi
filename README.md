@@ -125,6 +125,26 @@ No extra host setup needed if HA can see `/dev/hidraw*`.
 
 ## Setup B – Raspberry Pi as USB/IP bridge (confirmed)
 
+/## Recommended Hardware for Raspberry Pi Setups/,/## Installation/ {
+  /## Recommended Hardware for Raspberry Pi Setups/ {
+    i\
+\
+---
+    h
+    s/.*/## Raspberry Pi Setup for USB\/IP or MQTT\
+\
+This integration can be used with a Raspberry Pi acting as a remote host for the Seneye probe. This is useful for placing the probe far from your Home Assistant server.\
+\
+Due to the complexities and potential hardware incompatibilities of setting up a robust USB\/IP server, a **detailed, step-by-step guide** has been created.\
+\
+➡️ **See [RASPBERRY_PI_SETUP.md](RASPBERRY_PI_SETUP.md) for complete instructions.**\
+\
+Following this guide is **highly recommended** for a stable, "set it and forget it" system.\
+---
+/p
+  }
+  /## Installation/!d
+
 We use a Pi as a **USB/IP server** so HA “attaches” the Seneye as if local. The integration still uses **HID**.
 
 ### On the Raspberry Pi (server)
