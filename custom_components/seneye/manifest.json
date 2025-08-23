@@ -8,7 +8,8 @@
   "issue_tracker": "https://github.com/tamengual/home-assistant-seneye-pi/issues",
   "requirements": [
     "pyseneye",
-    "pyusb"
+    "pyusb",
+    "hidapi>=0.14.0.post4"
   ],
   "version": "1.5.0"
 }
